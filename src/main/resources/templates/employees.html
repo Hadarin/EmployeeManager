@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Employee Directory</title>
+</head>
+<body>
+<div class="container">
+    <div sec:authorize="hasAnyAuthority('ADMIN')">Hello <span th:text="${user.getName()}"/> <span th:text="${user.getLastName()}"/>.</div>
+    <br>
+    <br>
+<h3>Employee Directory</h3>
+<hr>
+
+    <a th:href="@{/employees/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
+        Add Employee
+    </a>
+
+    &nbsp;
+
+    <a sec:authorize="hasAnyAuthority('ADMIN')" th:href="@{/employees/users}" class="btn btn-primary btn-sm mb-3">Manage users</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Salary</th>
+        <th>Programming Language</th>
+        <th sec:authorize="hasAnyAuthority('ADMIN')">Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <tr th:each="tempEmployee : ${page}">
+
+
+        <td th:text="${tempEmployee.firstName}" />
+        <td th:text="${tempEmployee.lastName}" />
+        <td th:text="${tempEmployee.salary}" />
+        <td th:each="language : ${tempEmployee.languages}" th:text="${language.getLanguageName()}" />
+        <td sec:authorize="hasAnyAuthority('ADMIN')">
+            <a th:href="@{/employees/showFormForUpdate(employeeId=${tempEmployee.id})}"
+               class="btn btn-info btn-snm">
+                Update
+            </a>
+
+            &nbsp;
+
+           <a th:href="@{/employees/deleteEmployee(employeeId=${tempEmployee.id})}"
+               class="btn btn-danger btn-snm"
+               onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">
+                Delete
+            </a>
+
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+        <br>
+    <a th:href="@{/logout}" class="btn btn-primary btn-sm mb-3">
+       Logout
+    </a>
+
+</div>
+
+</body>
+</html>

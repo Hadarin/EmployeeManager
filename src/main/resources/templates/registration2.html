@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/test1.css}"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+    <style>
+        .error {color: red}
+        .h1 {color: #5d6160
+        }
+        .text-success {color: #299fa0
+        }
+    </style>
+</head>
+<body>
+<div class="form-style-8">
+            <form autocomplete="off" action="#" th:action="@{/registration}"
+                  th:object="${user}" method="post" class="form-horizontal"
+                  role="form">
+
+                <h1 class="h1" align="center">Registration Form</h1>
+
+                        <input type="text" th:field="*{name}" placeholder="Name"
+                               class="form-control"/>
+                        <label th:if="${#fields.hasErrors('name')}" th:errorClass ="error" th:errors="*{name}"
+                       class="validation-message"></label>
+
+                        <input type="text" th:field="*{lastName}"
+                               placeholder="Last Name" class="form-control"/>
+                        <label th:if="${#fields.hasErrors('lastName')}" th:errorClass ="error" th:errors="*{lastName}"
+                       class="validation-message"></label>
+
+                        <input type="text" th:field="*{email}" placeholder="Email"
+                               class="form-control"/>
+                        <label th:if="${#fields.hasErrors('email')}" th:errorClass ="error" th:errors="*{email}"
+                            class="validation-message"></label>
+
+                        <input type="password" th:field="*{password}"
+                               placeholder="Password" class="form-control"/>
+                        <label th:if="${#fields.hasErrors('password')}" th:errorClass ="error" th:errors="*{password}"
+                            class="validation-message"></label>
+
+                        <br>
+
+                 <input type="submit" value="Register user"/>
+
+                <br>
+
+                <span class="text-success" th:utext="${successMessage}"></span>
+
+                <br>
+
+                <a th:href="@{/login}">Go to login page</a>
+            </form>
+</div>
+            <script type="text/javascript">
+                //auto expand textarea
+                function adjust_textarea(h) {
+                    h.style.height = "20px";
+                    h.style.height = (h.scrollHeight)+"px";
+                }
+            </script>
+</body>
+</html>

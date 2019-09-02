@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Employee Form</title>
+
+    <style>
+        .error {color: red}
+    </style>
+
+</head>
+
+<body>
+
+<div class="container" align="center">
+
+    <p class="h4 mb-4">Save Employee</p>
+
+    <hr>
+
+    <form action="#" th:action="@{/employees/save}"
+                     th:object="${employee}" method="POST">
+
+        <input type="hidden" th:field="*{id}" />
+
+        <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First name">
+        <p th:if="${#fields.hasErrors('firstName')}" th:errorClass ="error" th:errors="*{firstName}">Incorrect firstName</p>
+
+        <input type="text" th:field="*{lastName}" class="form-control mb-4 col-4" placeholder="Last name">
+        <p th:if="${#fields.hasErrors('lastName')}" th:errorClass ="error" th:errors="*{lastName}">Incorrect lastName</p>
+
+        <input type="number" th:field="*{salary}" class="form-control mb-4 col-4" placeholder="Salary">
+        <p th:if="${#fields.hasErrors('salary')}" th:errorClass ="error" th:errors="*{salary}">Incorrect salary</p>
+
+        <select class="form-control mb-4 col-4" th:field="${language.languageName}">
+            <option value="0">select language</option>
+            <option value="C#">C#</option>
+            <option value="Java">Java</option>
+            <option value=".NET">.NET</option>
+            <option value="C++">C++</option>
+        </select>
+
+        <br>
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+
+        <hr>
+
+        <a th:href="@{/employees/list}">Back to Employees List</a>
+
+    </form>
+
+</div>
+
+</body>
+
+
+</html>
