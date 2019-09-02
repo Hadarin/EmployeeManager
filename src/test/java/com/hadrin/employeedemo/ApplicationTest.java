@@ -65,14 +65,14 @@ public class ApplicationTest {
 
 
 	@Test
-	@WithMockUser(username = "borov@ua.fm", authorities = { "ADMIN" })
+	@WithMockUser(username = "pedro@gmail.com", authorities = { "ADMIN" })
 	public void employeeListTest() throws Exception {
 		this.mvc.perform(get("/employees/list")).andExpect(status().isOk());
 	}
 
 
 	@Test
-	@WithMockUser(username = "borov@ua.fm", authorities = { "ADMIN" })
+	@WithMockUser(username = "pedro@gmail.com", authorities = { "ADMIN" })
 	public void employeeFormTest() throws Exception {
 		this.mvc.perform(get("/employees/showFormForAdd")).andExpect(status().isOk());
 	}
